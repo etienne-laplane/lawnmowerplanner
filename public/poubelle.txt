@@ -1,0 +1,116 @@
+	this.calcEtape=function(){
+		//for k
+		// for 0>i>k
+		//for j
+		//k>i>i
+		var bestcoef=10000;
+		var potentielcouples=[];
+		var etapes=[];
+		if(this.i!=fuelcan.selectedRect.i&&this.j!=fuelcan.selectedRect.j){
+			//generer tous les couples potientiels (for i/for j=j+i couples)
+			if(this.i<fuelcan.selectedRect.i){
+				for(var k=this.i;k <fuelcan.selectedRect.i+1;k++){
+					coef=0;
+					for(var p=this.i;p<k+1;p++){
+						coef+=evalinterest(arr[this.j][p].state);
+					}
+					for(var m=Math.min(this.j,fuelcan.selectedRect.j);m<Math.max(this.j,fuelcan.selectedRect.j)+1;m++){
+						coef+=evalinterest(arr[m][k].state);
+					}
+					for(var l=k;l<fuelcan.selectedRect.i+1;l++){
+						coef+=evalinterest(arr[fuelcan.selectedRect.j][l].state);
+					}
+					if(coef<bestcoef){
+						bestcoef=coef;
+						etapes=[new Rect(k,this.j,0,"Rober"),new Rect(k,fuelcan.selectedRect.j,0,"Robert2")];
+					}
+				}
+			}else{
+				for(var k=fuelcan.selectedRect.i;k <this.i+1;k++){
+					coef=0;
+					for(var p=this.i;p<k+1;p++){
+						coef+=evalinterest(arr[this.j][p].state);
+					}
+					for(var m=Math.min(this.j,fuelcan.selectedRect.j);m<Math.max(this.j,fuelcan.selectedRect.j)+1;m++){
+						coef+=evalinterest(arr[m][k].state);
+					}
+					for(var l=k;l<fuelcan.selectedRect.i+1;l++){
+						coef+=evalinterest(arr[fuelcan.selectedRect.j][l].state);
+					}
+					if(coef<bestcoef){
+						bestcoef=coef;
+
+						etapes=[new Rect(k,this.j,0,"Roger"),new Rect(k,fuelcan.selectedRect.j,0,"Roger2")];
+					}
+				}
+			}
+			//calculer le poids de chaque route (for potentiel)
+			//if < etapes =
+		}
+		return etapes;
+	}
+	
+	
+	
+	this.calcEuh2=function(){
+		var bestcoef=10000;
+		var etapes=[];
+		if(this.i!=order[0].i&&this.j!=order[0].j){
+			//generer tous les couples potientiels (for i/for j=j+i couples)
+			if(this.i<order[0].i){
+				for(var k=this.i;k <order[0].i+1;k++){
+					coef=0;
+					for(var p=this.i;p<k+1;p++){
+						coef+=evalinterest(arr[this.j][p].state);
+					}
+					for(var m=Math.min(this.j,order[0].j);m<Math.max(this.j,order[0].j)+1;m++){
+						coef+=evalinterest(arr[m][k].state);
+					}
+					for(var l=k+1;l<order[0].i+1;l++){
+						coef+=evalinterest(arr[order[0].j][l].state);
+					}
+					if(coef<bestcoef){
+						bestcoef=coef;
+						if(k!=order[0].i){
+							if(k!=this.i){
+								etapes=[new Rect(k,this.j,0,"Roro",false),new Rect(k,order[0].j,0,"Roro2",false)];
+							}else{
+								etapes=[new Rect(k,order[0].j,0,"Rara",false)]
+							}
+						}else{
+							etapes=[new Rect(k,this.j,0,"Aha",false)];
+						}
+					}
+				}
+			}else{
+				for(var k=order[0].i;k <this.i+1;k++){
+					coef=0;
+					for(var p=this.i;p<k+1;p++){
+						coef+=evalinterest(arr[this.j][p].state);
+					}
+					for(var m=Math.min(this.j,order[0].j);m<Math.max(this.j,order[0].j)+1;m++){
+						coef+=evalinterest(arr[m][k].state);
+					}
+					for(var l=k+1;l<order[0].i+1;l++){
+						coef+=evalinterest(arr[order[0].j][l].state);
+					}
+					if(coef<bestcoef){
+						bestcoef=coef;
+						if(k!=order[0].i){
+							if(k!=this.i){
+								etapes=[new Rect(k,this.j,0,"caca"),new Rect(k,order[0].j,0,"caca2")];
+							}else{
+								etapes=[new Rect(k,order[0].j,0,"cucu")]
+							}
+						}else{
+							etapes=[new Rect(k,this.j,0,"cici")];
+						}
+					}
+				}
+			}
+			//calculer le poids de chaque route (for potentiel)
+			//if < etapes =
+		}
+		return etapes;
+	}
+	
